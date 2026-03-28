@@ -11,8 +11,9 @@ class AuthService implements AuthServiceInterface
     /**
      * Add token for user
      * @param User $user
+     * return array
      */
-    public function generateToken(User $user)
+    public function generateToken(User $user): array
     {
         $tokenExpiration = Carbon::now()->addDay(1);
         $token = $user->createToken('access_api', [Token::ACCESS_API->value], $tokenExpiration)->plainTextToken;
