@@ -22,10 +22,28 @@ class AuthFormRequest extends FormRequest
      */
     public function rules(): array
     {
+        return $this->isMethod('post') ? $this->store() : $this->show();
+    }
+
+    /**
+     * function for post method
+     * @return array
+     */
+    public function store(): array
+    {
         return [
             'name' => 'min:4|nullable',
             'email' => 'required|email',
             'password' => 'required'
         ];
+    }
+
+    /**
+     * function for get method
+     * @return array
+     */
+    public function show(): array
+    {
+        return [];
     }
 }
