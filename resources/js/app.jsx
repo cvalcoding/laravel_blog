@@ -1,10 +1,8 @@
 import "./bootstrap";
 import React from "react";
 import { createRoot } from "react-dom/client";
-
-function App() {
-    return <h1>First page</h1>;
-}
+import { RouterProvider } from "react-router";
+import router from "./router";
 
 const root = createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<RouterProvider router={router} />);
