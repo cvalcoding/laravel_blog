@@ -6,7 +6,6 @@ async function fetchLogin(data) {
         return response;
     } catch (error) {
         console.error("Error login : ", error);
-        throw error;
     }
 }
 

@@ -29,7 +29,7 @@ function Login() {
         e.preventDefault();
         if (validation()) {
             const login = await loginData(formData);
-            if (login.success) {
+            if (login?.token) {
                 localStorage.setItem("token", login.data.access_token);
                 localStorage.setItem("expiration", login.data.expiration_token);
             } else {
