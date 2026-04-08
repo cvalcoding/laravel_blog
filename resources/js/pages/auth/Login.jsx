@@ -29,9 +29,10 @@ function Login() {
         e.preventDefault();
         if (validation()) {
             const login = await loginData(formData);
-            if (login?.token) {
-                localStorage.setItem("token", login.data.access_token);
-                localStorage.setItem("expiration", login.data.expiration_token);
+            console.log(login);
+            if (login?.access_token) {
+                localStorage.setItem("token", login.access_token);
+                localStorage.setItem("expiration", login.expiration_token);
             } else {
                 const error = {};
                 error.loginError = "Combinaison login and password failed";
