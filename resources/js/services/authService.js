@@ -18,4 +18,22 @@ async function fetchRegister(data) {
     }
 }
 
-export { fetchLogin, fetchRegister };
+async function fetchProfile() {
+    try {
+        const response = await apiClient.get("/user");
+        return response;
+    } catch (error) {
+        console.error("Error profile : ", error);
+    }
+}
+
+async function fetchLogOut() {
+    try {
+        const response = await apiClient.post("/user/logout");
+        return response;
+    } catch (error) {
+        console.error("Error logout : ", error);
+    }
+}
+
+export { fetchLogin, fetchRegister, fetchProfile, fetchLogOut };

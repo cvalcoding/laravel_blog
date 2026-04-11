@@ -1,4 +1,9 @@
-import { fetchLogin, fetchRegister } from "../services/authService";
+import {
+    fetchLogin,
+    fetchLogOut,
+    fetchProfile,
+    fetchRegister,
+} from "../services/authService";
 
 async function loginData(data) {
     try {
@@ -14,8 +19,26 @@ async function registerData(data) {
         const response = await fetchRegister(data);
         return response?.data;
     } catch (error) {
-        console.error("Error data register : ", data);
+        console.error("Error data register : ", error);
     }
 }
 
-export { loginData, registerData };
+async function getProfileData() {
+    try {
+        const response = await fetchProfile();
+        return response?.data;
+    } catch (error) {
+        console.error("Error data profile : ", error);
+    }
+}
+
+async function postLogOutData() {
+    try {
+        const response = await fetchLogOut();
+        return response?.data;
+    } catch (error) {
+        console.error("Error logout data : ", error);
+    }
+}
+
+export { loginData, registerData, getProfileData, postLogOutData };

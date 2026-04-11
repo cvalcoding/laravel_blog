@@ -9,8 +9,6 @@
         @vite('resources/js/app.jsx')
     </head>
     <body>
-        <main class="container">
-            <div id="root"></div>
-        </main>
+        <div id="root"></div>
     </body>
 </html>

@@ -3,8 +3,10 @@ import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { loginData } from "../../data/authData";
 import formValidation from "../../utils/formValidation";
+import { useNavigate } from "react-router";
 
 function Login() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -33,6 +35,7 @@ function Login() {
             if (login?.access_token) {
                 localStorage.setItem("token", login.access_token);
                 localStorage.setItem("expiration", login.expiration_token);
+                navigate("/");
             } else {
                 const error = {};
                 error.loginError = "Combinaison login and password failed";

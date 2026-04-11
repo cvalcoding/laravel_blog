@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getProfileData } from "../data/authData";
 
 function Home() {
-    return <h1>Home</h1>;
+    useEffect(() => {
+        const profile = async () => {
+            const data = await getProfileData();
+            console.log(data);
+        };
+        profile();
+    });
+
+    return (
+        <>
+            <h1>Home</h1>
+        </>
+    );
 }
 
 export default Home;
