@@ -1,7 +1,11 @@
-import { NavLink } from "react-router";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { getProfileData } from "../../data/authData";
 
 function Header() {
+    const [auth, setAuth] = useState(false);
     const token = localStorage.getItem("token");
+    const navigate = useNavigate();
     const links = [
         {
             id: 1,
@@ -14,6 +18,21 @@ function Header() {
             title: "About",
         },
     ];
+
+    useEffect(() => {
+        if (token) {
+            setAuth(true);
+        } else {
+            setAuth(false);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        console.log("log out pour user");
+        localStorage.removeItem("token");
+        navigate("/");
+    };
+
     return (
         <>
             <header>
@@ -32,54 +51,49 @@ function Header() {
                             ))}
                         </ul>
                         <ul className="nav">
-                            {token ? <UserLoggedIn /> : <UserLoggedOut />}
+                            {auth ? (
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink
+                                            to="/user"
+                                            className="nav-link link-body-emphasis px-2"
+                                        >
+                                            Profile
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <button
+                                            className="nav-link link-body-emphasis px-2"
+                                            onClick={handleLogout}
+                                        >
+                                            Log Out
+                                        </button>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink
+                                            to="/user/signin"
+                                            className="nav-link link-body-emphasis px-2"
+                                        >
+                                            Sign In
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink
+                                            to="/user/signup"
+                                            className="nav-link link-body-emphasis px-2"
+                                        >
+                                            Sign Up
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </nav>
             </header>
-        </>
-    );
-}
-
-function UserLoggedOut() {
-    return (
-        <>
-            <li className="nav-item">
-                <NavLink
-                    to="/user/signin"
-                    className="nav-link link-body-emphasis px-2"
-                >
-                    Sign In
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink
-                    to="/user/signup"
-                    className="nav-link link-body-emphasis px-2"
-                >
-                    Sign Up
-                </NavLink>
-            </li>
-        </>
-    );
-}
-
-function UserLoggedIn() {
-    return (
-        <>
-            <li className="nav-item">
-                <NavLink
-                    to="/user"
-                    className="nav-link link-body-emphasis px-2"
-                >
-                    Profile
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink to="#" className="nav-link link-body-emphasis px-2">
-                    Log Out
-                </NavLink>
-            </li>
         </>
     );
 }
